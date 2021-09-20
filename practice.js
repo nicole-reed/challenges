@@ -54,3 +54,24 @@ function iqTest(numbers) {
 
     return odd.length > even.length ? arr.indexOf(even[0]) + 1 : arr.indexOf(odd[0]) + 1
 }
+
+function findEvenIndex(arr) {
+    const reducer = (acc, current) => acc + current
+    let left = [0]
+    let right = [0]
+    let sumLeft = 0
+    let sumRight = 0
+    for (let i = 0; i < arr.length; i++) {
+        if (i > 0) {
+            left = arr.slice(0, i)
+        }
+        right = arr.slice(i + 1)
+        sumLeft = left.reduce(reducer)
+        sumRight = right.reduce(reducer)
+        if (sumLeft === sumRight) {
+            return i
+        }
+    }
+    return -1
+}
+console.log(findEvenIndex([1, 2, 3, 4, 3, 2, 1]))
